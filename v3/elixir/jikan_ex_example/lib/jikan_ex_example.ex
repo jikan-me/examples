@@ -6,7 +6,6 @@ defmodule JikanExExample do
 
   alias JikanEx.Request
 
-
   defp wait(), do: :timer.sleep(3000)
 
   def main do
@@ -21,6 +20,5 @@ defmodule JikanExExample do
     response = Request.user!(client, "xinil", [:animelist, :all, 2], %{year: 2019})
     IO.puts("Requested: " <> response["http_url"])
     IO.puts("Number of entries: #{response["anime"] |> length()}")
-
   end
 end
