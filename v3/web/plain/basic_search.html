@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<!-- An example of using fetch to make a search using the API -->
+<html>
+  <head>
+    <title>search!</title>
+    <meta charset="utf-8" />
+    <style>
+      html, body {
+        margin: 0;
+        border: 0;
+        width: 100%;
+      }
+      .search {
+        display: flex;
+        justify-content: center;
+        padding-top: 1rem;
+      }
+      #results, #results > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+        padding-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="search">
+      <input id="search_query" type="text" name="query" />
+      <button id="search">Go</button>
+    </form>
+    <div id="results">
+    </div>
+    <script>
+      // when button clicked, add results
+      document.querySelector(".search").addEventListener('submit', (event) => {
+        // dont submit the form
+        event.preventDefault()
+        let query = document.getElementById('search_query').value;
+        let requestUrl = `https://api.jikan.moe/v3/search/anime?q=${query}`;
+        fetch(requestUrl)
+          .then(response => response.json())
+          .then(data => {
+            // reset the contents of the results div
+            // this removes all the previous search results
+            let results = document.getElementById("results")
+            results.innerHTML = ''
+            data.results.forEach(item => {
+              // for each result, use document.createElement to create nodes
+              // append that to the end of the results div
+              let newDiv = document.createElement("div")
+              // since theres nothing in here we can use innerHTML to replace the contents directly, using a template literal
+              newDiv.innerHTML = `<a href="${item.url}">${item.title}</a>`
+              // add the image by using appendChild
+              let newImage = document.createElement("img")
+              newImage.src = item.image_url;
+              newDiv.appendChild(newImage)
+              // attach the entire div, which has the image and the link to results
+              results.appendChild(newDiv)
+            });
+          });
+      });
+    </script>
+  </body>
+</html>
