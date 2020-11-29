@@ -1,0 +1,1 @@
+For more examples, see [examples.py](https://github.com/abhinavk99/jikanpy/blob/master/examples.py), [examplesasync.py](https://github.com/abhinavk99/jikanpy/blob/master/examplesasync.py), and the [documentation](https://jikanpy.readthedocs.io/en/latest/)
