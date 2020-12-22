@@ -15,9 +15,7 @@ async function requestAnimeList(username) {
   let page = 1;
   while (true) {
     console.log(`Requesting ${username} ${page}`);
-    const newResp = await mal.findUser(username, "animelist", "all", {
-      page: page,
-    });
+    const newResp = await mal.findUser(username, "animelist", "all", {page: page});
     animeEntries.push(...newResp["anime"]);
     if (newResp["anime"].length < 300) {
       // returned less than 300 (typical amount in a pagination), exit
